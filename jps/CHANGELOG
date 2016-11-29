@@ -1,0 +1,140 @@
+-=Basic functionality=-
+
+Added class CanvasPanel extends JPanel to draw an image and draw it on the panel
+Added 'Open' JMenuItem to select an image to display in CanvasPanel
+Fixed bug: only part of the image displays until repaint is called on sections of CanvasPanel
+Scaled image to fit CanvasPanel
+Scaled while keeping aspect ratio
+Added JTabbedPane for multiple documents
+Added DocumentModel
+Changed package structure
+Modified CanvasPanel rendering
+Added File > Close to close tab
+Added document title to tabs
+Switch to opened document's tab when opened
+Added X button to tabs with working event handling
+
+-=The Navigation Update=-
+
+Images now open at certain scale while maintaining aspect ratio
+Wrote new rendering process
+Added zooming in and out with a menu item: View > Zoom in and View > Zoom out
+Fixed rendering bugs with clipped images
+Set minimum JFrame size
+Centered zooming in and out
+Made zooming with JMenuItems proportional to current zoom
+Changed frame title from "Java Photoshop" to "JPS"
+Fixed inconsistent rendering when zoomFactor is very large or very small
+Adjusted centered zooming for adjusted JFrame size
+Adjusted opening images with a size less than that of the window to open with a zoomFactor of maximumZoomFactor
+Adjusted zoom fit on screen to not ignore acceptable ranges of zoomFactor when fitting small images
+Added 'Zoom Actual Pixels' feature
+Checked usage of MVC on StackOverflow; refactored code for MVC
+Added JLabel and JTextField to status bar for adjusting zoom level
+Added automatic zoomLevel updating and decimal formatting to zoom level box (with % signs!)
+Added enabling and disabling of statusBar and its components with adding and removing documents
+Fixed zoom level status bar bug
+Refactored zoomFit at first render
+Added zooming in and out with text field by typing in numbers
+Added toolbar for image navigation and editing
+Added tool selection with Tool interface, Tool classes, and JPSModel updates
+Added panning when mouse is dragged with pan tool
+Add zooming in when CanvasPanelView is clicked with the zoom tool
+Changed code structure that resulted in development inefficiencies
+Used JTextField instead of JFormattedTextField for zoomLevel values for greater control over input values
+Added functionality for zoom level text field values with and without % at the end
+Added custom cursors depending on the current tool when mouse is over CanvasPanelView
+Changed JTextField behavior to add % at the end of numbers entered without a %
+Added beep and error dialog when invalid value is entered to the zoom level text field
+Added NumberFormat formatter using a percentage instance to format text in zoom level text field
+Fixed unusual pan margin for small zoom levels
+Centered zooming when updating zoom level text field
+Fixed bug where zoom level text field doesn't update
+Zoom level text field now updates when tabs are closed and when selected tab changes
+Added zooming in and out with the zoom tool when mouse is dragged left and right
+Fixed large cursor size
+Centered text in zoom level text field
+Zoom level text field is now cleared of text when all documents are closed
+View > Zoom In or View > Zoom Out gray out when zoom level is at maximum or minimum, respectively
+Added basic error handling for opening files other than .jpg, .png, and .bmp
+Changed the way resources are accessed so that the res folder can be put into the jar file
+
+
+
++-------+
+| To do |
++-------+
+Adjust JFileChooser to
+	restrict file types to jpg, gif, png, etc.
+	open in a convenient location
+	open in previously used location
+	add exception handling if necessary
+	don't open massive files - see if they lag
+Add keyboard shortcuts 
+	Open
+	Exit
+	Close
+	Zoom in
+	Zoom out
+	Zoom Fit on Screen
+	Pan tool
+	Zoom tool
+	Select different tab (alt + 1, CTRL + TAB, etc)
+	Select next/previous tab (arrows?)
+Start application maximized
+Add document information to status bar - path, mouse location, etc
+Update tooltips for tools to show keyboard shortcut
+Add Help > About (experiment with new windows)
+
+Set tab layout policy for tab overflow
+Put CanvasPanelView inside JScrollPane to allow scroll bar panning
+Add panning up and down when mouse wheel is scrolled
+Add panning left and right when mouse wheel is scrolled and Shift is pressed
+Add icons to open documents, depending on the file type - tabLabel.setIcon(new ImageIcon("path"));
+Add drop shadow to canvas area
+Add 'transparent' checkered background pattern
+Add white pixel grid when zoomFactor is above 5
+Make renderPositionX and renderPositionY doubles and adjust throughout to fix rounding issues
+Adjust zooming functionality so that zoom center doesn't change while zooming in and out - if rdrPosX and rdrPosY are doubles, the problem may be fixed
+Improve appearance of interface sections - toolbar, editing area, etc
+Add default appearace for toolbar buttons if the icon cannot be found?
+Add selected tool appearance
+
+
+
++---------+
+|Later on:|
++---------+
+Prepare for object serialization and deserialization
+Add PreferencesModel
+Add JPSViewModel for "last viewed as" capability
+Add tool bar for each tool
+Set the look and feel to the system that JPS is running on
+Add smooth zooming
+Add smooth panning
+Improve code - add to this list
+	Look at method calls for repetitive tasks to see if it would be better to have a variable instead
+	Sort methods
+	Make sure everything in JPSView, DocumentView, and CanvasPanelView are all in the right place
+	Add System.out.println("methodName"); to check what is being called upon (check for duplicates)
+Go through used API classes and check documentation to add functionality of methods - especially javax.swing.*
+Comment/"document" code
+Explore using XML to define menus and other GUI systems
+Add Help feature using trees, HTML/CSS, focused help (mouse position and focused components for specific help)
+Add splash screen
+Add tray icon?
+Look through java.awt.toolkit because it's awesome
+Add draggable tabs and flexible workspace
+Undo/redo
+Test on different operating systems to test appearance, consistency with contextual OS, and usability - myself and others should test
+Look at Java Beans to see if I can create my own JPS look and feel
+
+
+
++---------------+
+| DURING UPDATE |
++---------------+
+Thoroughly debug
+Test on other machines with other people
+Document new features
+Remove System.out.println(); statements

@@ -1,0 +1,39 @@
+**** $5. ****
+Using dotProduct and magnitude, define a function to compute the angle defined by two vectors - recall that v1 dot v2 = |v1| |v2| cos ?
+
+angle( [3,5] , [-5,3] )	1.57079...
+angle( [3,5] , [9,15] )		0.0
+angle( [10,7,5] , [-10,-7,-5] )	3.14159...
+angle( [0,1,2] , [3,4,5] )	0.48336...
+angle( [2,7,7,0,5] , [3,3,1,9,9] )	1.02270...
+
+table1, table2 = [ [0,1,2] , [3,4,5] , [6,7,8] ], [ [11,6] , [1,9] , [7,8] , [3,1] ]
+
+**** $6. ****
+
+the n-by-n identity matrix
+identity ( 2 ) 	->	[ [1,0] , [0,1] ]
+identity ( 3 ) 	->	[ [1,0,0] , [0,1,0] , [0,0,1] ]
+
+**** $$7. ****
+
+Reflect a matrix along its major diagonal.  Hint: use getColumn:
+
+print  ( transpose ( [ [0,1] , [2,3] , [4,5] ] ))		print ( transpose ( [ [0,1,2] , [3,4,5] ] ))
+
+Output									| 0 3 |
+| 0 2 4 |								| 1 4 |
+| 1 3 5 |								| 2 5 |
+
+**** $$$8. ****
+
+Multiply two matrices - use dotProduct and transpose:
+
+print (matrixProduct ( [ [11,6] , [1,9] , [7,8] , [2,7] ] , [ [0,1,2] , [3,4,5] ] ))
+
+| 18 35 52 |
+| 27 37 47 |
+| 24 39 54 |
+| 21 30 39 |
+
+Assume the matrices have appropriate dimensions..

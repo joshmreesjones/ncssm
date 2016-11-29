@@ -1,0 +1,12 @@
+CHIP Mux {
+	IN a, b, sel;
+	OUT out;
+
+	PARTS:
+		Not(in = sel, out = notSel);
+		And(a = a, b = notSel, out = test1);
+		
+		And(a = b, b = sel, out = test2);
+
+		Or(a = test1, b = test2, out = out);
+}

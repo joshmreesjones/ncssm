@@ -1,0 +1,218 @@
+
+<!-- saved from url=(0039)http://www.ncssm.edu/~yeh/hw/loops.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Loops</title>
+<style type="text/css"></style></head><body>
+
+<h2>Loops aka Iteration</h2>
+<hr>
+<h3>Warm-ups</h3>
+
+<pre>
+i) # sum from 1 to n
+triangle ( 4 )	-&gt;	10
+triangle ( 11 )	-&gt;	66
+
+ii)
+sigma ( 1 , 5 )	-&gt;	15
+sigma ( 4 , 8 )	-&gt;	30
+
+iii)
+factorial ( 5 )	-&gt;	120
+factorial ( 9 )	-&gt;	362880
+
+iv)
+pi ( 1 , 5 )	-&gt;	120
+pi ( 3 , 6 )	-&gt;	360
+
+v)
+count ( 's' , 'mississippi' )	-&gt;	4
+
+vi)  # don't use string.replace( )
+replace ( 'p' , 'b' , 'poppy' )	-&gt;	'bobby'
+
+vii)
+reverse ( 'pots' )	-&gt;	'stop'
+reverse ( 'embargo' )	-&gt;	'ograbme'
+reverse ('yvanehtnioj')	-&gt;	'jointhenavy'
+
+viii)
+segregate ( 'krzyzewski' )	-&gt;	('krzzwsk' , 'yei')
+segregate ( 'ukulele' )	-&gt;	('kll' , 'uuee')
+
+ix)
+abacab ( 'abcd' )	-&gt;	'abacabadabacaba'
+abacab ( 'html' )	-&gt;	'hthmhthlhthmhth'
+
+x)
+dcdb ( 'abcd' )		-&gt;	'dcdbdcdadcdbdcd'
+dcdb ( 'html' )		-&gt;	'lmltlmlhlmltlml'
+
+xi)
+crossover ( 'northcarolina' , 'southdakota' , 5 )	-&gt;	('northdakota' , 'southcarolina')
+
+xii)
+merge ( 'usairways' , 'americawest' )	-&gt;	'uasmaeirriwcaaywsest'
+merge ( 'kinkos' , 'fedex' )	-&gt;	'kfiendkeoxs'
+
+xiii)
+l337 ( 'REGGIE' )	-&gt;	'439913'
+l337 ( 'GEORGE' )	-&gt;	'930493'
+l337 ( 'BUSH' )		-&gt;	'8U5#'
+
+xiv) # don't convert to string
+digitcount ( 7 , 27705 )	-&gt;	2
+digitcount ( 0 , 27705 )	-&gt;	1
+
+xv)
+isSubset ( '' , 'y' )		-&gt;	True
+isSubset ( 'ioa' , 'aeiou' )	-&gt;	True
+isSubset ( 'GRAY' , 'ROYGBIV' )	-&gt;	False
+
+
+xvi)
+isAbbrev ( 'ncssm' , 'narcisissm' )	-&gt;	True
+isAbbrev ( 'aeiou' , 'facetious' )	-&gt;	True
+isAbbrev ( 'sttnn' , 'stentorian' )	-&gt;	False
+
+xvii)  # w/o using '*' * n
+makeRectangle( 3 , 5 ) -&gt;	'*****\n*****\n*****\n'
+makeRectangle( 4 , 2 ) -&gt;	'**\n**\n**\n**\n'
+print makeRectangle(3 , 5)	print makeRectangle(4 , 2)
+*****				**
+*****				**
+*****				**
+				**
+
+xviii)
+makePyramid( 3 , '*') -&gt;	'  *\n ***\n*****\n'
+makePyramid( 7 , '$') -&gt;	'      $\n     $$$\n    $$$$$\n   $$$$$$$\n  $$$$$$$$$\n $$$$$$$$$$$\n$$$$$$$$$$$$$\n'
+print makePyramid(3 , '*')		print makePyramid(7 , '$')
+  *					      $
+ ***					     $$$
+*****					    $$$$$
+					   $$$$$$$
+					  $$$$$$$$$
+					 $$$$$$$$$$$
+					$$$$$$$$$$$$$
+
+
+</pre>
+<hr>
+
+<h3>Part A: <i>WILD</i> <tt>while</tt></h3>
+
+**** 1. ****
+
+<pre> # don't try more factors than you need to
+isPrime ( 10 )	-&gt;	False
+isPrime ( 19 )	-&gt;	True
+isPrime ( 101 )	-&gt;	True
+isPrime ( 121 )	-&gt;	False
+</pre>
+
+**** 2. ****
+
+<pre> # number equals sum of its factors
+isPerfect ( 6 )		-&gt;	True
+isPerfect ( 13 )	-&gt;	False
+isPerfect ( 28 )	-&gt;	True
+# can you find the next perfect number?
+</pre>
+
+**** 3. ****
+<pre> # 1 1 2 3 5 8 13 21 ... , hint: "walk" up the sequence
+fibonacci ( 1 )	-&gt;	1
+fibonacci ( 3 )	-&gt;	2
+fibonacci ( 5 )	-&gt;	5
+fibonacci ( 7 )	-&gt;	13
+</pre>
+
+**** $4. ****
+<pre> # sum of digits , repeat until less than 10
+digitalRoot ( 124 )	-&gt;	7
+digitalRoot ( 27767 )	-&gt;	2
+</pre>
+
+**** 5. ****
+
+<pre># brownie points if you iteratively divide by 1000
+formatNumber ( 27707 )		-&gt;	'27,707'
+formatNumber ( 4543867 )	-&gt;	'4,543,867'
+</pre>
+<hr>
+
+<h3>Part B: <i>silly</i> strings</h3>
+
+**** 1. ****
+
+Define a function to digitize a vanity phone number. &nbsp;Brownie points if it returns the phone number as an int, instead of a string (ignore the L python shows).
+
+<pre>phoneNumber( '1900mixalot' )	19006492568
+phoneNumber ( '180044CYCLE' )	18004429253
+phoneNumber ( '1800FLOWERS' )	18003569377
+phoneNumber ( '1800rentaca' )	18007368222</pre>
+
+
+**** 2. ****
+
+Define a function to return the "marriage" of two strings. &nbsp;Join the strings at the first digraph (letter pair) in the first string that occurs in the second string.  Concatenate the strings if they are disjoint:
+
+<pre>marry( 'bill' , 'hillary' )	billary
+marry( 'ben' , 'jennifer' )	bennifer
+marry( 'duram' , 'raleigh' )	duraleigh
+marry( 'desmond' , 'molly' )	desmolly
+marry( 'david' , 'victoria' )	davictoria
+marry( 'voldemort' , 'morrison' )	voldemorrison	
+marry( 'java' , 'python' )	javapython
+
+</pre>
+
+
+**** 3. ****
+
+Define a function that determines if a string is a palindrome (brownie points if you don't use reverse():
+
+<pre>isPalindrome( 'madamimadam' )		True
+isPalindrome( 'amanaplanacanalpanama' )		True
+isPalindrome( 'knitsstink' )	True
+isPalindrome( 'seven' )		False
+isPalindrome( 'aaaaaabaaaaaa' )		True
+isPalindrome( 'aaaaaabaaaaa' )		False
+isPalindrome( 'r' )	True
+isPalindrome( 'nc' )	False
+isPalindrome( 'DDT' )	False
+</pre>
+
+
+**** 4. ****
+
+Define a function that determines if two strings are anagrams:
+
+<pre>areAnagrams( 'alec guinness' , 'genuine class' )
+areAnagrams( 'jimmorrison' , 'mrmojorisin' )
+areAnagrams( 'johnmorrison' , 'mrhojosnorin' )
+areAnagrams( 'dennisyeh' , 'heysinned' )
+areAnagrams( 'tomax' , 'xamot' )
+areAnagrams( 'zelpuz' , 'puzzle' )
+areAnagrams( 'tarzan' , 'zartan' )
+areAnagrams( 'cs' , 'cs' )
+areAnagrams( '' , '' )</pre>
+should all return <tt>True</tt> (as should their converses)
+
+<pre>areAnagrams( 'dennisyeh' , 'judelaw' )
+areAnagrams( 'symmetry' , 'asymmetry' )
+areAnagrams( 'light' , 'night' )
+areAnagrams( 'polio' , 'polo' )
+areAnagrams( '' , 'm' )
+areAnagrams( 's' , '' )</pre>
+should all return <tt>False</tt> (as should their converses)
+
+<hr>
+
+<ul>Comments
+ <li>These should take you a total of ~ 2-3 hours of writing code.  If you find yourself stuck idly for longer than ten minutes, get help.</li>
+ <li>The test arguments are by no means exhaustive - you should conceive your own to test your solutions more robustly</li>
+</ul>
+
+
+</body></html>

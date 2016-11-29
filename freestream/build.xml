@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="FreeStream" default="run" basedir=".">
+	<description>
+		This build file is used to compile, jar, and run the FreeStream project.
+	</description>
+
+	<path id="runtime.path">
+		<pathelement location="lib/basicplayer3.0.jar"/>
+		<pathelement location="lib/commons-logging-api-1.1.3.jar"/>
+		<pathelement location="lib/commons-logging-api.jar"/>
+		<pathelement location="lib/jl1.0.1.jar"/>
+		<pathelement location="lib/jogg-0.0.7.jar"/>
+		<pathelement location="lib/jorbis-0.0.17.jar"/>
+		<pathelement location="lib/jspeex0.9.7.jar"/>
+		<pathelement location="lib/JTattoo-1.6.10.jar"/>
+		<pathelement location="lib/mp3agic-0.8.2.jar"/>
+		<pathelement location="lib/mp3spi1.9.5.jar"/>
+		<pathelement location="lib/tritonus_share.jar"/>
+		<pathelement location="lib/vorbisspi1.0.3.jar"/>
+	</path>
+
+	<path id="build.path">
+		<pathelement location="lib/basicplayer3.0.jar"/>
+		<pathelement location="lib/commons-logging-api-1.1.3.jar"/>
+		<pathelement location="lib/commons-logging-api.jar"/>
+		<pathelement location="lib/jl1.0.1.jar"/>
+		<pathelement location="lib/jogg-0.0.7.jar"/>
+		<pathelement location="lib/jorbis-0.0.17.jar"/>
+		<pathelement location="lib/jspeex0.9.7.jar"/>
+		<pathelement location="lib/JTattoo-1.6.10.jar"/>
+		<pathelement location="lib/mp3agic-0.8.2.jar"/>
+		<pathelement location="lib/mp3spi1.9.5.jar"/>
+		<pathelement location="lib/tritonus_share.jar"/>
+		<pathelement location="lib/vorbisspi1.0.3.jar"/>
+	</path>
+
+	<path id="classpath">
+		<fileset dir="lib">
+			<include name="*.jar"/>
+		</fileset>
+	</path>
+
+	<!-- clean deletes the directories used when building FreeStream. These directories are bin/ and dist/. -->
+	<target name="clean" description="deletes the build directories">
+		<delete dir="bin"/>
+		<delete dir="dist"/>
+	</target>
+
+	<!-- compile compiles all source files in the src/ directory to the bin/ directory. compile depends on clean. -->
+	<target name="compile" depends="clean" description="compiles all source files">
+		<mkdir dir="bin/"/>
+
+		<javac srcdir="src" destdir="bin" classpathref="classpath" includeantruntime="false">
+			<classpath>
+				<pathelement location="lib/*.jar"/>
+			</classpath>
+		</javac>
+	</target>
+
+	<!-- jar packages all classes in bin/ into a JAR and puts it into the dist/ directory. jar depends on compile. -->
+	<target name="jar" depends="compile" description="packages all classes into a JAR">
+		<mkdir dir="dist/"/>
+
+		<path id="build.path">
+			<fileset dir="lib">
+				<include name="*.jar"/>
+			</fileset>
+		</path>
+
+		<manifestclasspath property="lib.list" jarfile="dist/FreeStream.jar">
+			<classpath refid="build.path"/>
+		</manifestclasspath>
+
+		<jar destfile="dist/FreeStream.jar" basedir="bin">
+			<manifest>
+				<attribute name="Main-Class" value="edu.ncssm.cs.freestream.Main"/>
+				<attribute name="Class-Path" value="${lib.list}"/>
+			</manifest>
+		</jar>
+	</target>
+
+	<!-- run simply runs the jar file in dist/. run depends on jar. -->
+	<target name="run" depends="jar" description="runs the generated JAR">
+		<java jar="dist/FreeStream.jar" fork="true" classpathref="runtime.path"/>
+	</target>
+
+	<target name="backup" depends="jar" description="performs a full backup of the root freestream/ directory">
+		<tstamp>
+			<format property="time.stamp" pattern="yyyy-MM-dd_HH:mm:ss"/>
+		</tstamp>
+
+		<zip destfile="../freestream_${time.stamp}.zip" basedir="."/>
+	</target>
+</project>

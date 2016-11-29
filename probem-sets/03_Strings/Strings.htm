@@ -1,0 +1,211 @@
+
+<!-- saved from url=(0041)http://www.ncssm.edu/~yeh/hw/strings.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Strings</title>
+<style type="text/css"></style></head><body>
+ 
+string method reference: <a href="http://docs.python.org/py3k/library/string.html">http://docs.python.org/py3k/library/string.html</a>
+<h2 style="font-style:italic">for the letters and the strings</h2>
+<hr>
+<h3>Warm-ups</h3>
+<pre>i) larger ( 5 , 3 )	-&gt;	5
+   larger ( 7 , 9 )	-&gt;	9
+ii) largest3 (3 , 7 , 4)	-&gt;	7
+    largest3 (1 , 2 , 3)	-&gt;	3
+
+iii) californicate ( 'hell' )	-&gt;	'hella'
+     californicate ( 'hey' )	-&gt;	'heya'
+iv) snoopify ( 'fosh' )	-&gt;	'foshizzle'
+v) firstChar ('ncssm')	-&gt;	'n'
+vi) lastChar ('ncssm')	-&gt;	'm'
+vii) dropFirst ( 'ncssm' )	-&gt;	'cssm'
+viii) dropLast ( 'ncssm' )	-&gt;	'ncss'
+ix)  splitAt ( 'racemic' , 4 )	-&gt;	('race' , 'mic')
+x) isPrefix ('UG' , 'AUGCGAGGC')	-&gt;	False
+   isPrefix ('ion' , 'ionization')	-&gt;	True
+xi) insertAfter ('a' , 'horse' , 'o')	-&gt;	'hoarse'
+    insertAfter ('e' , 'teeth' , 'h')	-&gt;	'teethe'
+xii) insertAt ('a' , 'horse' , 2)	-&gt;	'hoarse'
+     insertAt ('u' , 'color' , 4)	-&gt;	'colour'
+xiii)  sandwich ('ion' , 'izat')	-&gt;	'ionization'
+       sandwich ('tse' , '')		-&gt;	'tsetse'
+xiv)  toRNA ('TACGAATTGAATTCAATTCCTA')	-&gt;	'UACGAAUUGAAUUCAAUUCCUA'
+xv)   to12hr ( '0000' ) -&gt;	'12:00 AM'
+      to12hr ( '0515' )	-&gt;	'5:15 AM'
+      to12hr ( '1230' )	-&gt;	'12:30 PM'
+      to12hr ( '1459' )	-&gt;	'2:59 PM'
+      to12hr ( '2600' )	-&gt;	'illegal time'
+      to12hr ( '0399' )	-&gt;	'illegal time'
+xvi)  to24hr ( '12:30 AM' ) 	-&gt;	'0030'
+      to24hr ( '3:33 AM' )	-&gt;	'0333'
+      to24hr ( '11:00 AM' )	-&gt;	'1100'
+      to24hr ( '12:59 PM' )	-&gt;	'1259'
+      to24hr ( '11:04 PM' )	-&gt;	'2304'
+      to24hr ( '93.9 FM' )	-&gt;	'illegal time'
+xvii) formatLine ( 3 , 6 )	-&gt;	'y = 3x + 6'
+      formatLine ( 2 , -1)	-&gt;	'y = 2x - 1'
+      formatLine ( -1 , 0)	-&gt;	'y = -x'
+xviii) # ie 0 ≤ angle &lt; 2π (radians, counter-clockwise) from x-axis
+elevationAngle3G ( 5,5 )	-&gt;	0.78539816339744828
+elevationAngle3G ( -2,4 )	-&gt;	2.677945044588987
+elevationAngle3G ( 4,2 )	-&gt;	0.46364760900080609
+elevationAngle3G ( 0,-3 )	-&gt;	4.7123889803846897
+elevationAngle3G ( 0,0 )	-&gt;	None
+
+xix)
+saffirSimpson ( 30 )	-&gt;	'Tropical Depression'
+saffirSimpson ( 50 )	-&gt;	'Tropical Storm'
+saffirSimpson ( 80 )	-&gt;	'Category 1 Hurricane'
+saffirSimpson ( 100 )	-&gt;	'Category 2 Hurricane'
+saffirSimpson ( 120 )	-&gt;	'Category 3 Hurricane'
+saffirSimpson ( 150 )	-&gt;	'Category 4 Hurricane'
+saffirSimpson ( 160 )	-&gt;	'Category 5 Hurricane'
+
+</pre>
+<!--
+<hr />
+
+<h4>**** 1.) *****</h4>
+<pre>
+a.) # $ try to minimize >/< s
+#  do not use max() , min()
+sort3 (3 , 7 , 4)	->	(3 , 4 , 7)
+sort3 (1 , 2 , 3)	->	(1 , 2 , 3)
+sort3 (9 , 8 , 7)	->	(7 , 8 , 9)
+
+b.)
+filterOdds (4 , 5)	->	5
+filterOdds (7 , 8)	->	7
+filterOdds (9 , 11)	->	(9 , 11)
+filterOdds (2 , 32)	->	None
+
+c.) # use //
+letterGrade ( 90 )	->	'A'
+letterGrade ( 87 )	->	'B'
+letterGrade ( 74 )	->	'C'
+
+d.) # use %
+plusMinus ( 90 )	->	'-'
+plusMinus ( 87 )	->	'+'
+plusMinus ( 74 )	->	''
+
+e.)
+completeGrade ( 90 )	->	'A-'
+completeGrade ( 87 )	->	'B+'
+completeGrade ( 74 )	->	'C'
+
+$f.)
+quadratic ( 1 , 5 , 6 )    ->	( -2.0 , -3.0 )
+quadratic ( -1 , 8 , -16 ) ->	4.0
+quadratic ( 2 , 2 , 1 )    ->	( '-1 + i' , '-1 - i' )
+ 
+
+$g.)  # the number of multiples in the specified range , use / %
+# inclusive in lower bound, exclusive in upper bound
+multsInRange ( 54 , 92 , 3 )	->	13
+multsInRange ( 10 , 20 , 3 )	->	3
+multsInRange ( 10 , 20 , 5 )	->	2
+multsInRange ( 30 , 50 , 15 )	->	2
+multsInRange ( 40 , 75 , 19 )	->	1
+
+h.)  # use multsInRange, inclusive in lower bound, exclusive in upper bound
+# every four years, except every hundred years, except every 400 years 
+leapYears ( 1900 , 2000 )	->	24
+leapYears ( 2000 , 2100 )	->	25
+leapYears ( 1492 , 2006 )	->	125
+leapYears ( 1983 , 1999 )	->	4
+leapYears ( 1984 , 5150 )	->	768
+
+$$$i.)  #  decompose this mighty task into smaller sub-tasks by defining more auxiliary functions
+daysElapsed ( 3 , 13 , 2006 , 3 , 31 , 2006 )	->	18
+daysElapsed ( 2 , 2 , 2002 , 12 , 25 , 2002 )	->	326
+daysElapsed ( 2 , 2 , 2004 , 12 , 25 , 2004 )	->	327
+daysElapsed ( 4 , 25 , 2005 , 12 , 12 , 2005 )	->	231
+daysElapsed ( 8 , 22 , 2006 , 6 , 9 , 2007 )	->	291
+daysElapsed ( 1 , 1 , 1949 , 1 , 1 , 1996 )	->	17166
+daysElapsed ( 11 , 6 , 1978 , 1 , 3 , 2007 )	->	10285
+daysElapsed ( 7 , 4 , 1776 , 9 , 17 , 1787 )	->	4092
+
+j.)  # find the perpendicular bisector, use formatLine() et al.
+# achtung!  consider ALL cases
+bisector( 1,2 , 3,4 )	->	'y = -x + 5'
+bisector( 5,0 , -3,11 )	->	'y = .727x + 4.772'
+bisector( 7,2 , 0,2 )	->	'x = 3.5'
+bisector( 9,2 , 9,2 )	->	'undefined'
+</pre>
+-->
+
+<hr>
+<h4>**** 1.) *****</h4>
+<pre>from string import *
+a.)
+bostonize ('nomargarciaparra')	-&gt;	'nomaagaaciapaaaa'
+bostonize ('harvardyard')	-&gt;	'haavaadyaad'
+bostonize ('clamchowder')	-&gt;	'clamchowdea'
+
+b.)  # if is unnecessary
+isSuffix ('GC' , 'AUGCGAGGC')	-&gt;	True
+isSuffix ('io' , 'ionization')	-&gt;	False
+
+c.)
+isDufix ('ion' , 'ionization')	-&gt;	True
+isDufix ('tse' , 'tsetse')	-&gt;	True
+isDufix ('UG' , 'AUGCGAGUG')	-&gt;	False
+
+d.)
+insertBefore ('a' , 'horse' , 'r')	-&gt;	'hoarse'
+insertBefore ('a' , 'corn' , 'c')	-&gt;	'acorn'
+
+e.)
+dropCharAt (2 , 'hoarse')	-&gt;	'horse'
+dropCharAt (4 , 'colour')	-&gt;	'color'
+
+f.)
+drop ('u' , 'flavour')	-&gt;	'flavor'
+drop ('h' , 'yoghurt')	-&gt;	'yogurt'
+
+g.)
+pigLatin ('linux')	-&gt;	'inuxlay'
+pigLatin ('bogle')	-&gt;	'oglebay'
+pigLatin ('rast')	-&gt;	'astray'
+
+
+h.)  # cut G\AATTC
+eCoR1 ('GAATTC')			-&gt;	('G' , 'AATTC')
+eCoR1 ('TACGAATTGAATTCAATTCCTA')	-&gt;	('TACGAATTG' , 'AATTCAATTCCTA')
+
+i.)
+antisense ('TACGAATTGAATTCAATTCCTA')	-&gt;	'ATGCTTAACTTAAGTTAAGGAT'
+
+j.)
+toScientificNotation ( 3.1415 )		-&gt;	'3.1415e0'
+toScientificNotation ( 50000 )		-&gt;	'5.0e4'
+toScientificNotation ( 0.00824 )	-&gt;	'8.24e-3'
+
+k.)  # use nested if statement and int() or float()
+toFloat( '1/2' )	-&gt;	0.5
+toFloat( '3 2/6' )	-&gt;	3.3333333
+toFloat( '5' )		-&gt;	5
+
+$l.) # assume mm/dd/yy (1950-2050)  or mm/dd/yyyy format
+formatDate ( '01/01/10' ) -&gt;	'January 1, 2010'
+formatDate ( '11/11/2011' ) -&gt;  'November 11, 2011'
+formatDate ( '31/41/5926' ) -&gt;  'invalid date'
+
+$m.)
+formatSSN ( 123456789 ) -&gt; '#123-45-6789'
+formatSSN ( 8675309 ) -&gt; 'invalid ss#'
+
+$n.)
+formatPhNo. ( 8008675309 ) -&gt; '(800)-867-5309'
+
+</pre>
+<hr>
+
+<ul>Comments
+ <li>These should take you a total of ~ 2-3 hours of active code-typing time.  If you find yourself stuck idly for longer than ten minutes, get help - if you find you're spending longer than 2-3 hours actively typing code, you're probably behind in class.</li>
+ <li>The test arguments are by no means exhaustive - you should conceive your own to test your solutions more robustly</li>
+</ul>
+
+
+
+</body></html>

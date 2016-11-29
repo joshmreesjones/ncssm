@@ -1,0 +1,278 @@
+
+<!-- saved from url=(0039)http://www.ncssm.edu/~yeh/hw/lists.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Lists</title>
+<style type="text/css"></style></head><body style="color: #2200aa">
+<h2>Lists (and more Loops and Iteration)</h2>
+<hr>
+<h3>Warm-ups</h3>
+
+<pre>i)
+sum ( [4,5,6,7] )	-&gt;	22
+
+ii)
+product ( [4,5,6,7] )	-&gt;	840
+
+iii)  # without using max, obviously
+maximum ( [4,6,9,3] )	-&gt;	9
+maximum ( [3] )		-&gt;	3
+maximum ( [] )		-&gt;	None
+
+iv)
+nestedSum ( [ [1,6] , [3,8,5]] )	-&gt;	23
+
+v)
+getRow ( 1 , [[0,1,2] , [3,4,5]]  )	-&gt;	[0,1,2]
+
+vi)
+getColumn ( 1 , [[0,1,2] , [3,4,5]] )	-&gt;	[0,3]
+
+vii)
+implode ( [2,7,7,0,7] )	-&gt;	27707
+
+viii)
+explode ( 27707 )	-&gt;	[2,7,7,0,7]
+
+ix)
+delimit ( [ 'bread' , 'butter' ] )	-&gt;	'bread and butter'
+delimit ( [ 'parsley' , 'sage' , 'rosemary' , 'thyme' ] )	-&gt;	'parsley, sage, rosemary, and thyme'
+delimit ( [ 'sneezy' , 'sleepy' , 'grumpy' , 'happy' , 'bashful' , 'doc' , 'dopey' ] )	-&gt;	'sneezy, sleepy, grumpy, happy, bashful, doc, and dopey'
+
+x) # make one pass, use a "counter" list, ignore order
+frequencies ( 'TACGAATTGAATTCAATTCCTA' )	-&gt;	[0.36..., 0.18.., 0.36..., 0.09...]
+
+xi)
+formatPolynomial ( [-1,4,0,1] )	-&gt;	'-x^3 + 4x^2 + 1'
+
+xii)
+# try brute-force and try synthetic substitution
+evalPolynomial ( [-1,4,0,1] , 2 )	-&gt;	9
+
+xiii)
+allPrimes ( 10 )  -&gt;	[2, 3, 5, 7, 11, 13, 17, 19, 23, 29]
+allPrimes ( 60 ) -&gt;	[2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167, 173, 179, 181, 191, 193, 197, 199, 211, 223, 227, 229]
+
+xiv)  # find the first pair of consecutive primes that differ by at least n
+$ if you don't use allPrimes
+findPrimeGap ( 14 )	-&gt;	(113 , 127)
+findPrimeGap ( 30 )	-&gt;	(1327 , 1361)
+
+xv)  # take the discrete n-th derivative
+derivative ( 1, [1,2,3,4,5] )	-&gt;	[1,1,1,1]
+</pre>
+<hr>
+<h3>Part A: <i>How do I love Python? Let me count the ways</i></h3>
+<pre>
+1.)  # index a master list with 'one' , 'two' , ...
+onesHelper ( 2 )	-&gt;	'two'
+onesHelper ( 9 )	-&gt;	'nine'
+
+2.)  # similar  use onesHelper and minimize redundancy a.m.a.p.:
+tensHelper ( 3 )	-&gt;	'three'
+tensHelper ( 10 )	-&gt;	'ten'
+tensHelper ( 17 )	-&gt;	'seventeen'
+tensHelper ( 40 )	-&gt;	'forty'
+tensHelper ( 84 )	-&gt;	'eighty-four'
+
+3.)  # use onesHelper, tensHelper and minimize redundancy a.m.a.p.:
+hundredsHelper ( 65 )	-&gt;	'sixty-five'
+hundredsHelper ( 300 )	-&gt;	'three hundred'
+hundredsHelper ( 912 )	-&gt;	'nine hundred twelve'
+hundredsHelper ( 731 )	-&gt;	'seven hundred thirty-one'
+hundredsHelper ( 501 )	-&gt;	'five hundred one'
+
+$4.)  #  make another master list with 'thousand' , 'million' , ...
+articulate ( 0 )			-&gt;	'zero'
+articulate ( 220	)		-&gt;	'two hundred twenty'
+articulate ( 1000 )		-&gt;	'one thousand'
+articulate ( 1000000000 )	-&gt;	'one billion'
+articulate ( 12023830000009807032 )	-&gt;	'twelve quintillion twenty-three quadrillion eight hundred thirty trillion nine
+million eight hundred seven thousand thirty-two'
+
+# brownie points for correct spacing, brownie anti-points for incorrect spelling
+
+
+</pre>
+<hr>
+
+<h3>Part B: <i>What's your vector, Victor?</i></h3>
+
+<p>
+In this section, a vector is represented as a list of numbers.
+</p>
+<!--
+**** 1. ****
+Define a function to calculate the angle of elevation (from the positive x axis of a two-dimensional "vector" (represented by a list of two numbers):
+
+<pre>angle( [
+-->
+<p>**** 1. ****<br>
+Define a function that amplifies a vector by a scalar:
+
+</p><pre>scale( [ 2,7,7,0,5 ] , 3 )	[ 6,21,21,0,15 ]
+scale ( [ 1,-2,3,4 ] , -2 )	[ -2,4,-6,-8 ]
+</pre>
+<p></p>
+
+<p>**** 2. ****<br>
+
+Define a function that returns the magnitude of a vector:
+
+</p><pre>magnitude ( [ 3 , 4 ] )		5.0
+magnitude ( [ 3 , -4 ] )	5.0
+magnitude ( [ .2 , 1.1 , 1 ] )	1.5
+magnitude ( [ 6 , 7 , -6 ] )	11.0
+magnitude ( [ -1 , 1 , 1 , 1 , -1 , 1 , -1 , -1, -1 ] )		3.0
+</pre><p></p>
+
+<p>**** 3. ****<br>
+
+Define a function that returns the vector sum of two vectors (assume they are the same length):
+
+</p><pre>addVectors ( [ 0,1,2 ]  ,  [ 3,4,5 ] )		[ 3,5,7 ]
+addVectors ( [ 2,7,7,0,5 ] , [ 3,3,1,9,9 ] )		[ 5,10,8,9,14 ]
+</pre><p></p>
+
+<p>**** 4. ****<br>
+Define a function that returns the dot product of two vectors (assume they are the same length):
+
+</p><pre>dotProduct ( [ 0,1,2 ]  ,  [ 3,4,5 ] )		14
+dotProduct ( [ 2,7,7,0,5 ] , [ 3,3,1,9,9 ] )		79
+</pre><p></p>
+
+
+<p>**** $5. ****<br>
+
+Using <tt>dotProduct</tt> and <tt>magnitude</tt>, define a function to compute the angle defined by two vectors - recall that <tt>v1 dot v2 = |v1| |v2| cos θ</tt> 
+
+</p><pre>angle( [3,5] , [-5,3] )	1.57079...
+angle( [3,5] , [9,15] )		0.0
+angle( [10,7,5] , [-10,-7,-5] )	3.14159...
+angle( [0,1,2] , [3,4,5] )	0.48336...
+angle( [2,7,7,0,5] , [3,3,1,9,9] )	1.02270...
+</pre>
+<p></p>
+
+<hr>
+<h3>Part C: <i>1-Var Stats</i></h3>
+
+<pre># The variance is the average of the squares of the deviations(aka residuals) of the data from their mean.
+# The standard deviation is the square root of the variance.
+
+1.)  $$ if you only take a single pass through the list
+stdDev ( [5,5,5,5,5,5,5] ) 		-&gt; 0.0
+stdDev ( [1,2,3,4,5,6,7,8,9,10] )	-&gt; 2.8723
+stdDev ( [93,95,85,87,100,79,90] )	-&gt; 6.4238
+
+2.) # within the standard deviation of the mean , order doesn't matter
+firstInterval ( [5,5,5,5,5,5,5] )	-&gt; [5,5,5,5,5,5,5]
+firstInterval ( [1,2,3,4,5,6,7,8,9,10] )	-&gt; [3,4,5,6,7,8]
+firstInterval ( [93,95,85,87,100,79,90] )	-&gt; [93,95,85,87,90]
+
+3.) # any algorithm is fine. selection sort is (arguably) the simplest.
+sort ( [3,1,4,1,5,9,2,6] )	-&gt;	[1,1,2,3,4,5,6,9]
+
+$$$4.)
+mode ( [4,5,6,3,4,5,6,7,8,7,6,5,4,3,2,4,1,2,4] )  -&gt; 4
+mode ( [1,1,2,2,3,3,4,4] )	-&gt;
+
+$$$5.)
+majority ( [4,5,6,3,4,5,6,7,8,7,6,5,4,3,2,4,1,2,4] )  -&gt;
+majority ( [7,6,5,7,8,7,5,7,7,1,7,7]	-&gt;  7
+
+$6.)  $$ without sorting
+median ( [3,1,4,1,5,9,2,6,5] )	-&gt; 4
+median ( [4,5,6,3,4,5,6,7,8,7,6,5,4,3,2,4,1,2,4] )  -&gt; 5
+
+</pre>
+<hr>
+<h3>Part D: <i>2D Frutti</i></h3>
+
+<p>
+</p><pre>
+table1 = [ [0,1,2] , [3,4,5] , [6,7,8] ]			
+table2 = [ [11,6] , [1,9] , [7,8] , [3,1] ]
+
+<p>**** 1. ****<br>
+formatTable ( table1 )	-&gt;	'| 0 1 2 |\n| 3 4 5 |\n| 6 7 8 |'	
+formatTable ( table2 )	-&gt;	'| 11 6 |\n| 1 9 |\n| 7 8 |\n| 3 1 |'
+
+Note: using print displays the formatted lists
+
+print formatTable ( table1 )					print formatTable ( table2 )
+
+Output								| 11 6 |
+| 0 1 2 |							| 1 9 |
+| 3 4 5 |							| 7 8 |
+| 6 7 8 |							| 3 1 |
+
+Don't worry if different length entries cause a column to line up incorrectly.
+</p>
+
+<!--crossProductdeterminantreflectrotatemajoraxisidentityinverse-->
+
+<p>**** 2. ****<br>
+find2D ( table1 , 7 ) 	-&gt;  (2,1)
+find2D ( table1 , 20 )	-&gt;  -1
+find2D ( table2 , 6 )	-&gt;  (0,1) 	
+
+
+
+</p><p>**** 3. ****<br>
+
+isSquare ( table1 )	-&gt; True
+isSquare ( table2 )	-&gt; False
+isSquare ( [ [1,1] , [1] ] )	-&gt; False
+
+
+</p><p>**** 4. ****<br>
+w/o using reverse()
+flip ( table1 )	-&gt;	[ [8,7,6] , [5,4,3] , [2,1,0] ]
+flip ( table2 ) -&gt;	[ [1,3] , [8,7] , [9,1] , [6,11] ]
+
+
+</p><p>**** 5. ****<br>
+the major diagonal
+diagonal ( table1 )	-&gt; [0,4,8]
+diagonal ( table2 )	-&gt; [11,9]
+
+
+</p><p>**** $6. ****<br>
+the n-by-n identity matrix
+identity ( 2 ) 	-&gt;	[ [1,0] , [0,1] ]
+identity ( 3 ) 	-&gt;	[ [1,0,0] , [0,1,0] , [0,0,1] ]
+
+
+
+</p><p>**** $$7. ****<br>
+Reflect a matrix along its major diagonal.  Hint: use <tt>getColumn</tt>:
+
+print  ( transpose ( [ [0,1] , [2,3] , [4,5] ] ))		print ( transpose ( [ [0,1,2] , [3,4,5] ] ))
+
+Output									| 0 3 |
+| 0 2 4 |								| 1 4 |
+| 1 3 5 |								| 2 5 |
+</p>
+
+<p>**** $$$8. ****<br>
+
+Multiply two matrices - use <tt>dotProduct</tt> and <tt>transpose</tt>:
+
+print (matrixProduct ( [ [11,6] , [1,9] , [7,8] , [2,7] ] , [ [0,1,2] , [3,4,5] ] ))
+
+| 18 35 52 |
+| 27 37 47 |
+| 24 39 54 |
+| 21 30 39 |
+</p></pre>
+
+Assume the matrices have appropriate dimensions..
+<p></p>
+<hr>
+<ul>Comments
+
+ <li>These should take you a total of ~ 2-3 hours of active code-typing time.  If you find yourself stuck idly for longer than ten minutes, get help - if you find you're spending longer than 2-3 hours actively typing code, you're probably behind in class.</li>
+ <li>The test arguments are by no means exhaustive - you should conceive your own to test your solutions more robustly</li>
+</ul>
+
+
+</body></html>

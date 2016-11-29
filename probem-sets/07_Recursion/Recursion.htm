@@ -1,0 +1,268 @@
+
+<!-- saved from url=(0043)http://www.ncssm.edu/~yeh/hw/Recursion.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>Recursion</title>
+  <style>
+    body {background-color: #3D9140}
+  </style>
+<style type="text/css"></style></head> 
+<body>
+
+<h2>In Recursion We Trust</h2>
+<hr>
+<h3>Warm-ups</h3>
+
+<pre>i)
+factorial ( 4 ) 	-&gt;	24
+
+ii) # entry at i-th row, j-th column in Pascal's triangle
+pascal (2 , 1)	-&gt;	1
+pascal (5 , 3)	-&gt;	6
+
+iii) # assume first arg &lt; second arg
+euclidGCD ( 39 , 102 )	-&gt;	3
+
+iv)  #  O(log n) please (don't use **)
+quickExpt ( 2 , 11 )	-&gt;	2048
+
+v)  #  O(log n) please (don't use math.log)
+log ( 2 , 100 )	-&gt;	6
+log ( 3 , 100 )	-&gt;	4
+
+vi)  #  O(2<sup>n</sup>) is ok for now
+fibonacci ( 9 )	-&gt;	34
+
+vii)
+digitalRoot( 25705 ) -&gt;	  1
+
+vii)  #  assume n &gt; 0 
+primeFactorization ( 72 )	-&gt;	[2,2,2,3,3]
+primeFactorization ( 2310 )	-&gt;	[2,3,5,7,11]
+primeFactorization ( 109 )	-&gt;	[109]
+primeFactorization ( 1 ) 	-&gt;	[]
+
+
+M = [[ 0 , 1 , 0 , 0 , 1 , 1 ]
+  ,  [ 1 , 1 , 1 , 0 , 0 , 1 ]
+  ,  [ 0 , 0 , 0 , 0 , 1 , 1 ]
+  ,  [ 0 , 0 , 1 , 0 , 1 , 0 ]
+  ,  [ 0 , 0 , 1 , 1 , 1 , 0 ]]
+
+viii)
+onePath( M , 4 , 2 ) -&gt; ['rt','rt','up','up','rt','up','up']
+onePath( M , 4 , 4 ) -&gt; ['up','up','rt','up','up']
+onePath( M , 0 , 5 ) -&gt; []
+onePath( M , 1 , 1 ) -&gt; None # or False
+onePath( M , -2 , ,8 ) -&gt; None # or False
+
+#####################################
+#  use this for the nested list functions below
+
+def printNest ( nest ) :
+ asStr = str(nest)
+ width = len(asStr)
+ charmap = [' ' * width]
+ def write ( s , r , c , charmap) :
+  while len(charmap) &lt;= r :
+    charmap += [' ' * width]
+  row = charmap[r]
+  charmap[r] = row[:c] + s + row[c+len(s):]
+ depth = -1
+ i = 0
+ while i &lt; width :
+  ch = asStr[i]
+  if ch == '[' :
+   depth += 1
+  write ( ch , depth , i , charmap )
+  if ch == ']' :
+   depth -= 1
+  i += 1
+ print (charmap[0])
+ for row in charmap[1:] :
+   print ('\n'+row)
+
+def isList ( exp ) :
+  return type(exp) == type([])
+#####################################
+
+ix)
+isFlat ( [[4],[[3,6],[],7],[8]] )		-&gt;	False
+isFlat ( [2,7,7,0,5] )		-&gt;	True
+
+x)
+nestSum ( 6 )				-&gt;	6
+nestSum ( [[4],[[3,6],[],7],[8]] )	-&gt;	28
+
+xi)
+countAtoms ( 6 )			-&gt;	1
+countAtoms ( [[4],[[3,6],[],7],[8]] )	-&gt;	5
+
+xii)  # assume no constituent []s
+nestMax ( 6 )				-&gt;	6
+nestMax ( [[4],[[3,6],11,7],[8]] )	-&gt;	11
+
+xiii)
+flatten ( 6 )				-&gt;	[6]
+flatten ( [[4],[[3,6],[],7],[8]] )	-&gt;	[4,3,6,7,8]
+</pre>
+<hr>
+<h3>ad hoc Recursion</h3>
+<pre>
+Q = [[ 8 , 4 , 2 , 3 , 3 ]
+  ,  [ 3 , 5 , 3 , 3 , 9 ]
+  ,  [ 9 , 7 , 7 , 4 , 6 ]
+  ,  [ 6 , 4 , 9 , 3 , 2 ]]
+
+1)  # find path from top left , first arg is roadblock
+#  all steps down or right
+clearPath( 3 , Q , 3 , 4 ) -&gt; [8,4,5,7,7,4,6,2]
+clearPath( 3 , Q , 2 , 2 ) -&gt; [8,4,5,7,7]
+clearPath( 7 , Q , 3 , 1 ) -&gt; [8,3,9,6,4]
+clearPath( 3 , Q , -2 , 8) -&gt; None
+clearPath( 4 , Q , 0 , 2 ) -&gt; None
+
+2) # do not retroactively use findAllSums
+findSum ( 0 , [3,8,9,19,14,10])		-&gt;	[]
+findSum ( 16 , [3,8,9,19,14,10])	-&gt;	None
+findSum ( 26 , [3,8,9,19,14,10])	-&gt;	[3,9,14]
+findSum ( 55 , [1,2,4,8,16,32] )	-&gt;	[1,2,4,16,32]
+findSum ( 35 , [1,2,4,8,16,32] )	-&gt;	[1,2,32]
+findSum ( 26 , [1,2,4,8,16,32] )	-&gt;	[2,8,16]
+
+$3) # use map , do not exhaustively search ('brute force')
+findAllSums ( 0 , [3,8,9,19,14,10])	-&gt;	[[]]
+findAllSums ( 16 , [3,8,9,19,14,10])	-&gt;	[]
+findAllSums ( 26 , [3,8,9,19,14,10])	-&gt;	[[3,9,14]]
+findAllSums ( 26 , [1,2,4,8,16,32] )	-&gt;	[[2,8,16]]
+findAllSums ( 10 , [4,6,7,3,1] )	-&gt;	[[7, 3], [6, 3, 1], [4, 6]] )
+findAllSums ( 8 , [4,6,7,3,1] )	-&gt;	[[7, 1], [4, 3, 1]] )
+findAllSums ( 10 , [2,4,6,7,3,1] )	-&gt;	[[7, 3], [6, 3, 1], [4, 6], [2, 7, 1], [2, 4, 3, 1]] )
+
+$4)  # MERGESORT
+a)  # assume the two lists are sorted, no recursion necessary
+merge ( [1,4,9,16,25] , [1,2,3,5,7,11] )	-&gt;	[1,1,2,3,4,5,7,9,11,16,25]
+
+b)  # divide list into two, sort them recursively and merge them
+mergeSort ( [3,1,4,1,5,9,2,6,5,3,5,8,9,7] )	-&gt; [1,1,2,3,3,4,5,5,5,6,7,8,9,9]
+mergeSort ( [2,7,1,8,2,8,1,8,2,8,4,5,9,0] )	-&gt; [0,1,1,2,2,2,4,5,7,8,8,8,8,9]	
+
+# use this to test your code
+import random
+def randomList (length, cap) :
+  list = [0] * length
+  i = 0
+  while i &lt; len(list) :
+    list[i] = random.randint(0,cap)
+    i += 1
+  return list
+
+randomList ( 10 , 20 )	-&gt;	[17, 5, 1, 12, 14, 13, 4, 9, 6, 12]
+mergeSort ( randomList( ? , ? ))	-&gt;  [??]
+</pre>
+
+<hr>
+<h3>Nested Lists</h3>
+<pre>nest1 = [[4],[[3,6],[],7],8]
+nest2 = [[[3]] , 7 , [[5 , [9 , 2] , [[[[[4]] , 2]]]]]]
+nest3 = [[5],[[3,9],[],7],2]
+
+1)
+nestIn ( 6 , 6 )			-&gt;	True
+nestIn ( 5 , 6 )			-&gt;	False
+nestIn ( 6 , nest1 )	-&gt;	True
+nestIn ( 5 , nest1 )	-&gt;	False
+
+2)
+nestReverse ( nest1 )	-&gt;	[8, [7, [], [6, 3]], [4]]
+nestReverse ( nest2 )	-&gt;	[[[[[[2, [[4]]]]], [2, 9], 5]], 7, [[3]]]
+
+3) # the sequence of indices to first occurence of key element
+nestFind ( 6 , 6 )			-&gt;	[]
+nestFind ( 5 , 6 )			-&gt;	-1
+nestFind ( 6 , nest1 )	-&gt;	[1,0,1]
+nestFind ( 5 , nest1 )	-&gt;	-1
+nestFind ( 3 , nest2 )	-&gt;	[0,0,0]
+nestFind ( 4 , nest2 )	-&gt;	[2,0,2,0,0,0,0,0]
+
+4) # same shape?
+isomorphic ( nest1 , nest2 )		-&gt;	False
+isomorphic ( nest1 , nest3 )		-&gt;	True
+isomorphic ( nest2 , nest3 )		-&gt;	False
+
+
+5) # remove all atoms
+#  mind the base/recursive case analysis
+pillage ( nest1 ) -&gt;  [[],[[],[]]]
+pillage ( nest2 ) -&gt;  [[[]] , [[[] , [[[[[]]]]]]]]
+
+$6)  # use map,max
+depth ( nest1 )	-&gt;	3
+depth ( nest2 )	-&gt;	8	
+
+$7)
+nestMap ( lambda x : x*10 , nest1 )	-&gt;	[[40],[[30,60],[],70],80]
+nestMap ( lambda x : x+1 , nest2 )	-&gt;	[[[4]] , 8 , [[6 , [10 , 3] , [[[[[5]] , 3]]]]]]
+
+$8) # assume lists are isomorphic
+align ( lambda x,y : x+y , nest1 , nest3 )	-&gt;	[[9],[[6,15],[],14],10]
+
+</pre>
+<hr>
+<h3>Silly unicorn, combinatorics are for kids</h3>
+<pre>1)
+combinations ( 'unicorN' , 8 )		[]
+combinations ( 'unicorN' , 0 )		['']
+combinations ( 'unicorN' , 1 )		['N', 'r', 'o', 'c', 'i', 'n', 'u']
+combinations ( 'unicorN' , 2 )		['rN', 'oN', 'or', 'cN', 'cr', 'co', 'iN',
+                                         'ir', 'io', 'ic', 'nN', 'nr', 'no', 'nc',
+                                         'ni', 'uN', 'ur', 'uo', 'uc', 'ui', 'un']
+combinations ( 'unicorN' , 3 )		['orN', 'crN', 'coN', 'cor', 'irN', 'ioN', 'ior',
+                                         'icN', 'icr', 'ico', 'nrN', 'noN', 'nor', 'ncN',
+                                         'ncr', 'nco', 'niN', 'nir', 'nio', 'nic', 'urN',
+                                         'uoN', 'uor', 'ucN', 'ucr', 'uco', 'uiN', 'uir',
+                                         'uio', 'uic', 'unN', 'unr', 'uno', 'unc', 'uni']
+combinations ( 'unicorN' , 6 )		['nicorN', 'uicorN', 'uncorN', 'uniorN', 'unicrN', 'unicoN', 'unicor']
+combinations ( 'unicorN' , 7 )		['unicorN']
+
+$$2) think recursively, do not "brute force"
+allnTupleSums(0 , [])				-&gt;	[[]]
+allnTupleSums(3 , [])				-&gt;	[]
+allnTupleSums(0 , [[8]])			-&gt;	[]
+allnTupleSums(33 , [[1,3,5],[8,12],[19,22,25]])	-&gt;	[[3,8,22]]
+allnTupleSums(28, [[11],[9],[8]])		-&gt;	[[11,9,8]]
+allnTupleSums(2 , [[2,3,2,4,5]])		-&gt;	[[2] , [2]]
+allnTupleSums(15, [[11,6],[1,9,7,8],[2,8]])	-&gt;	[[6,1,8],[6,7,2]]
+allnTupleSums(9, [[1,2,3],[5,6,7]])		-&gt;	[[2,7] , [3,6]]
+allnTupleSums(19 , [[11,6],[1,9,7,8],[2,8]])	-&gt;	[]
+
+$3a.)
+diagonalInsert ('a' , [])		-&gt;	[]
+diagonalInsert ('c' , ['o' , 'rn'])	-&gt;	[['co', 'rn']
+						,['o', 'crn']]
+diagonalInsert ('u' , ['co','nir','n'])	-&gt;	[['uco', 'nir', 'n']
+						,['co', 'unir', 'n']
+						,['co', 'nir', 'un']]
+
+$3b.)
+addSingleton ('a' , [])			-&gt;	['a']
+addSingleton ('c' , ['o' , 'rn'])	-&gt;	['c', 'o', 'rn']
+addSingleton ('u' , ['co','nir','n'])	-&gt;	['u' , 'co', 'nir', 'n']
+
+$$$$3c.)  ## recursion and use addSingleton, diagonalInsert, flatmap and map
+partitions ( 'corn' , 5 )	-&gt;	[]
+partitions ( 'corn' , 1 )	-&gt;	[['corn']]
+partitions ( 'corn' , 2 )	-&gt;	[['c', 'orn'], ['co', 'rn'], ['o', 'crn'], ['cor', 'n']
+					,['or', 'cn'], ['cr', 'on'], ['r', 'con']]
+partitions ( 'corn' , 3 )	-&gt;	[['c', 'o', 'rn'], ['c', 'or', 'n'], ['c', 'r', 'on']
+					, ['co', 'r', 'n'], ['o', 'cr', 'n'], ['o', 'r', 'cn']]
+partitions ( 'corn' , 4 )	-&gt;	[['c' , 'o' , 'r' , 'n']]
+
+</pre>
+<hr>
+<ul>Comments
+ <li>These should take you a total of ~ 2-3 hours of active code-typing time.  If you find yourself stuck idly for longer than ten minutes, get help - if you find you're spending longer than 2-3 hours actively typing code, you're probably behind in class.</li>
+ <li>The test arguments are by no means exhaustive - you should conceive your own to test your solutions more robustly</li>
+</ul>
+
+
+</body></html>

@@ -1,0 +1,56 @@
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+
+public abstract class Shape {
+  private int x;
+  private int y;
+  private Color color;
+  
+  public Shape(int newX, int newY, Color newColor) {
+    x = newX;
+    y = newY;
+    color = newColor;
+  }
+  
+  public final void setColor(Color newColor) {
+    color = newColor;
+  }
+  
+  public final void setX(int newX) {
+    x = newX;
+  }
+  
+  public final void setY(int newY) {
+    y = newY;
+  }
+  
+  public final Color getColor() {
+    return color;
+  }
+  
+  public final int getX() {
+    return x;
+  }
+  
+  public final int getY() {
+    return y;
+  }
+  
+  public final void translate(int dx, int dy) {
+    x += dx;
+    y += dy;
+  }
+  
+  public String toString() {
+    return shapeType() + " @ (" + x + ", " + y + attributes();
+  }
+  
+  protected abstract String attributes();
+  protected abstract String shapeType();
+  
+  public abstract double getPerimeter();
+  public abstract double getArea();
+  
+  public abstract void drawWith(Graphics2D g2d);
+}
